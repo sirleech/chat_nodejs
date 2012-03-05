@@ -6,10 +6,12 @@
 
 <script>
 $(document).ready(function(){
+
   
   now.name = prompt("What's your name?", "");  
   now.receiveMessage = function(name, message){
     $("#messages").append("<div class='message'>" + name + ": " + message + "</div>");
+    playSound("http://4umi.com/web/sound/beeplo.wav");
   }
   
   $("#send-button").click(function(){
@@ -29,11 +31,17 @@ function distribute(){
 	$("#text-input").val("");
 	$("#messages > div:first").remove();
 }
+
+function playSound( url ){   
+  document.getElementById("sound").innerHTML="<embed src='"+url+"' hidden=true autostart=true loop=false>";
+}
+
 </script>
 </head> 
  
 <body> 
 <div id="messages"></div>
+<div id="sound" ></div>
 
 <input type="text" id="text-input">
 <input type="button" value="Send" id="send-button">
