@@ -16,15 +16,13 @@ var messageCount = 0;
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
-  
-  // get the last 10 messages
   if (messages.length < 10) {
 		for (var i = 1; i < messages.length; i++) {
-		  this.now.receiveMessage(names[i], messages[i]);
+		  this.now.receiveMessageNoNotifications(names[i], messages[i]);
 		}
 	} else {
 		for (var i = messageCount-10 ; i <= messageCount; i++) {
-		  this.now.receiveMessage(names[i], messages[i]);
+		  this.now.receiveMessageNoNotifications(names[i], messages[i]);
 		}
 	}
 });
@@ -37,8 +35,6 @@ everyone.disconnected(function(){
 everyone.now.distributeMessage = function(message){
 	everyone.now.receiveMessage(this.now.name, message);
 	messageCount++;
-	
-	// save the message
 	names[messageCount] = this.now.name;
 	messages[messageCount] = message;
 	

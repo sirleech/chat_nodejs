@@ -8,9 +8,14 @@
 $(document).ready(function(){
 
   
-  now.name = prompt("What's your name?", "");  
+  now.name = prompt("What's your name?", "");
+  
+  now.receiveMessageNoNotifications = function(name, message){
+  	appendMessage(name,message);
+  }
+    
   now.receiveMessage = function(name, message){
-    $("#messages").append("<div class='message'>" + name + ": " + message + "</div>");
+    appendMessage(name,message);
     playSound("http://4umi.com/web/sound/beeplo.wav");
   }
   
@@ -26,10 +31,16 @@ $(document).ready(function(){
   
 });
 
+function appendMessage(name,message){
+	$("#messages").append("<div class='message'>" + name + ": " + message + "</div>");
+}
+
 function distribute(){
 	now.distributeMessage($("#text-input").val());
 	$("#text-input").val("");
-	$("#messages > div:first").remove();
+	if ($("#messages div").length > 10){
+		$("#messages > div:first").remove();
+	}
 }
 
 function playSound( url ){   
