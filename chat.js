@@ -13,9 +13,15 @@ var everyone = nowjs.initialize(server);
 var names = new Array();
 var messages = new Array();
 var messageCount = 0;
+var userNames = new Array();
+var onlineUsersCount = 0;
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
+  console.log("id: " + this.user.clientId);
+  
+  userNames[this.user.clientId] = this.now.name;
+  
   if (messages.length < 10) {
 		for (var i = 1; i < messages.length; i++) {
 		  this.now.receiveMessageNoNotifications(names[i], messages[i]);
@@ -25,11 +31,23 @@ everyone.connected(function(){
 		  this.now.receiveMessageNoNotifications(names[i], messages[i]);
 		}
 	}
+	
+	everyone.getUsers(function (users) {
+  	onlineUsersCount =  users.length;
+	});
+	
+	everyone.now.receiveUserList(onlineUsersCount + "online users.");
 });
 
 
 everyone.disconnected(function(){
   console.log("Left: " + this.now.name);
+  
+  everyone.getUsers(function (users) {
+  	onlineUsersCount =  users.length;
+	});
+	
+	everyone.now.receiveUserList(onlineUsersCount + "online users.");
 });
 
 everyone.now.distributeMessage = function(message){
