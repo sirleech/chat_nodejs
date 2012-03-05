@@ -15,7 +15,7 @@ var messageCount = 0;
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
-	for (var i = 0; i < messages.length; i++) {
+	for (var i = 1; i < messages.length; i++) {
     this.now.receiveMessage(names[i], messages[i]);
 	}
 });
