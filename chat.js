@@ -31,10 +31,8 @@ everyone.connected(function(){
 		  this.now.receiveMessageNoNotifications(names[i], messages[i]);
 		}
 	}
-	
-	everyone.getUsers(function (users) {
-  	everyone.now.receiveUserList(users.length + " online users.");
-	});	
+	refreshUserList();
+
 	
 });
 
@@ -42,9 +40,7 @@ everyone.connected(function(){
 everyone.disconnected(function(){
   console.log("Left: " + this.now.name);
   
-  everyone.getUsers(function (users) {
-  	everyone.now.receiveUserList(users.length + " online users.");
-	});	
+  refreshUserList();
 	
 });
 
@@ -56,3 +52,13 @@ everyone.now.distributeMessage = function(message){
 	
 	console.log(messageCount + " messages");
 };
+
+function refreshUserList(){
+	everyone.getUsers(function (users) {
+		var userString = "";
+		for (var i = 0; i < users.length; i ++) {
+			userString = userString + ", " + userNames[users[i]];
+		}
+  	everyone.now.receiveUserList("There are " + users.length + " people online now." + userString + " =  people online now.");
+	});	
+}
