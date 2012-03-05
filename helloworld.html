@@ -7,6 +7,7 @@
 <script>
 $(document).ready(function(){
 
+	var t;
   
   now.name = prompt("What's your name?", "");
   
@@ -17,6 +18,8 @@ $(document).ready(function(){
   now.receiveMessage = function(name, message){
     appendMessage(name,message);
     playSound("http://4umi.com/web/sound/beeplo.wav");
+		if (name != now.name)
+			newMessageNotification();
   }
   
   now.receiveUserList = function(userListString) {
@@ -32,8 +35,42 @@ $(document).ready(function(){
      distribute();
    }
 	});
+
+	$(window).click(function() {
+  	clearMessageNotification();
+  });
   
+	
 });
+
+function clearMessageNotification(){
+	$("#notification").text("");
+	$("#notification").css("background","white");
+	$("#notification").css("height","0px");
+	clearTimeout(t);
+}
+
+function newMessageNotification(t){
+	$("#notification").text("You have a new message!");
+	$("#notification").css("background","green");
+	$("#notification").css("height","80px");
+	t = setTimeout("blink()",1000);
+}
+
+var blazo = true;
+
+function blink(){	
+	if (blazo == true)	{
+		$("#notification").css("background","red");
+		blazo = false;
+		t = setTimeout("blink()",1000);
+	} else {
+		$("#notification").css("background","green");
+		blazo = true;
+		t = setTimeout("blink()",1000);
+	}
+}
+
 
 function appendMessage(name,message){
 	if (name == now.name) {
@@ -59,6 +96,7 @@ function playSound( url ){
 </head> 
  
 <body> 
+<div id="notification" style="font-size:26px;color:white;font-weight:bold;"></div>
 <div id="messages"></div>
 <div id="sound" ></div>
 <div id="users" style="font-weight:bold;"></div>
