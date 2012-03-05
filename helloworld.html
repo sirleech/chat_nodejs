@@ -36,7 +36,11 @@ $(document).ready(function(){
 });
 
 function appendMessage(name,message){
-	$("#messages").append("<div class='message'>" + name + ": " + message + "</div>");
+	if (name == now.name) {
+		$("#messages").append("<div class='message'>" + "<i>" + name + "</i>" + ": " + message + "</div>");
+	} else {
+		$("#messages").append("<div class='message'>" + name + ": " + message + "</div>");
+	}
 }
 
 function distribute(){
