@@ -33,10 +33,9 @@ everyone.connected(function(){
 	}
 	
 	everyone.getUsers(function (users) {
-  	onlineUsersCount =  users.length;
-	});
+  	everyone.now.receiveUserList(users.length + " online users.");
+	});	
 	
-	everyone.now.receiveUserList(onlineUsersCount + "online users.");
 });
 
 
@@ -44,10 +43,9 @@ everyone.disconnected(function(){
   console.log("Left: " + this.now.name);
   
   everyone.getUsers(function (users) {
-  	onlineUsersCount =  users.length;
-	});
+  	everyone.now.receiveUserList(users.length + " online users.");
+	});	
 	
-	everyone.now.receiveUserList(onlineUsersCount + "online users.");
 });
 
 everyone.now.distributeMessage = function(message){
