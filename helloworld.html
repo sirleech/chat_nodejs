@@ -2,12 +2,19 @@
 <head> 
 <title>nowjs test</title> 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script> 
+<script type="text/javascript" src="http://ausbots.com.au/js/raphael-min.js"></script>
 <script src="/nowjs/now.js"></script>
 
+
 <script>
-$(document).ready(function(){
 
 	var t;
+$(document).ready(function(){
+
+		  
+  now.receiveState = function(state){
+  	draw(state);
+  }
   
   now.name = prompt("What's your name?", "");
   
@@ -90,6 +97,71 @@ function distribute(){
 
 function playSound( url ){   
   document.getElementById("sound").innerHTML="<embed src='"+url+"' hidden=true autostart=true loop=false>";
+}
+
+function draw(state){
+	// Creates canvas 320 × 200 at 10, 50
+	
+	var paper = Raphael(350, 0, 320, 200);
+			
+		var i = 0;
+		var incr;
+		// Creates circle at x = 50, y = 40, with radius 10
+		var circles = [];
+		
+		for(var i = 0; i < 5; i++){
+			incr = i * 20;
+			circles[i] = paper.circle(50 + incr, 40, 10);
+			
+			switch(state[i]){
+				case 0:
+					circles[i].attr("fill", "white");
+					circles[i].data("color","white");
+					break;
+				case 1:
+					circles[i].attr("fill", "red");
+					circles[i].data("color","red");
+					break;
+				case 2:
+					circles[i].attr("fill", "green");
+					circles[i].data("color","green");
+					break;
+			}
+		}
+	
+	
+	paper.forEach(function (el) {
+    
+    el.click(function changeColor() {
+    	
+			if (el.data("color") == "red") {
+				el.attr("fill", "green");
+				el.data("color","green");
+				el.data("state",2)
+			} else {
+				el.attr("fill", "red");
+				el.data("color","red");
+				el.data("state",1)
+			}
+			
+			//now.distributeCircleState(getState());
+		});
+	});
+	
+	function getState(){
+		var state = [];
+		var i = 0;
+		paper.forEach(function (el) {
+			state[i] = el.data("state");
+			i++;
+		});
+		return state;
+	}
+
+	for (var i = 0; i < circles.length; i++){
+		//circles[i].attr("fill", "#fff");
+	}
+
 }
 
 </script>

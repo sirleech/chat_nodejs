@@ -15,6 +15,7 @@ var messages = new Array();
 var messageCount = 0;
 var userNames = new Array();
 var onlineUsersCount = 0;
+var curState = [0,0,0,0,0];
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
@@ -32,7 +33,7 @@ everyone.connected(function(){
 		}
 	}
 	refreshUserList();
-
+	this.now.receiveState(curState);
 	
 });
 
@@ -52,6 +53,11 @@ everyone.now.distributeMessage = function(message){
 	
 	console.log(messageCount + " messages");
 };
+
+everyone.now.distributeCircleState = function (state) {
+	curState = state;
+	everyone.now.receiveState(state);
+}
 
 function refreshUserList(){
 	everyone.getUsers(function (users) {
