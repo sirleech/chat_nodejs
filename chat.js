@@ -1,13 +1,26 @@
 ﻿var fs = require('fs');
-var server = require('http').createServer(function(req, response){
-  fs.readFile('helloworld.html', function(err, data){
-    response.writeHead(200, {'Content-Type':'text/html'});  
-    response.write(data);  
-    response.end();
-  });
-});
 
-server.listen(8888);
+
+var server = require('http').createServer(function (request, response) {
+ 
+console.log('request starting...');
+     
+    fs.readFile('./index.html', function(error, content) {
+        if (error) {
+            response.writeHead(500);
+            response.end();
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+            response.end(content, 'utf-8');
+        }
+    });
+     
+}).listen(8888);
+ 
+console.log('Server running at http://127.0.0.1:8888/');
+
+//server.listen(8888);
 var nowjs = require("now");
 var everyone = nowjs.initialize(server);
 var names = new Array();
