@@ -1,18 +1,34 @@
 ﻿var fs = require('fs');
+var path = require('path');
+var http = require('http');
 
-
-var server = require('http').createServer(function (request, response) {
+var server = http.createServer(function (request, response) {
  
-console.log('request starting...');
+//console.log('request starting...');
      
-    fs.readFile('./index.html', function(error, content) {
-        if (error) {
-            response.writeHead(500);
-            response.end();
+    //console.log('request starting...');
+     
+    var filePath = '.' + request.url;
+    if (filePath == './')
+        filePath = './index.html';
+     
+    path.exists(filePath, function(exists) {
+     
+        if (exists) {
+            fs.readFile(filePath, function(error, content) {
+                if (error) {
+                    response.writeHead(500);
+                    response.end();
+                }
+                else {
+                    response.writeHead(200, { 'Content-Type': 'text/html' });
+                    response.end(content, 'utf-8');
+                }
+            });
         }
         else {
-            response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.end(content, 'utf-8');
+            response.writeHead(404);
+            response.end();
         }
     });
      
