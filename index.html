@@ -9,51 +9,7 @@
 <link href="chat.css" rel="stylesheet" type="text/css">
 <script>
 
-$(document).ready(function(){
 
-  now.receiveState = function(state,name){
-  	draw(state,name);
-  }
-  
-  now.name = prompt("What's your name?", "");
-  
-  now.receiveMessageNoNotifications = function(name, message){
-  	appendMessage(name,message);
-  }
-    
-  now.receiveMessage = function(name, message){
-    appendMessage(name,message);
-		
-		if (name != now.name) {
-			$("#notification").text("You have a new message!");
-			playSound("beeplo.wav");
-		}
-  }
-  
-  now.receiveUserList = function(userListString) {
-  	$("#users").text(userListString);
-  }
-  
-  $("#send-button").click(function(){
-    distribute();
-  });
-  
-  $("#text-input").keypress(function(event) {
-  if (event.which == 13) {
-     distribute();
-   }
-	});
-
-	// clear messages on click 
-	$(window).click(function() {
-  	clearMessageNotification();
-  });
-  $("#text-input").click(function() {
-  	clearMessageNotification();
-  });
-  
-	
-});
 </script>
 </head> 
  

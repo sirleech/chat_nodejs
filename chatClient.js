@@ -1,5 +1,59 @@
+//////////////////////////
 
+var paper;
 var circles;
+
+$(document).ready(function(){
+	
+  now.receiveState = function(state,name){
+		if (paper == null)
+  		// Creates canvas 900 × 680 at 350, 20	
+  		paper = Raphael(350, 20, 900, 680);
+  		
+  	paper.clear();
+  	draw(state,name);
+  }
+  
+  now.name = prompt("What's your name?", "");
+  
+  now.receiveMessageNoNotifications = function(name, message){
+  	appendMessage(name,message);
+  }
+    
+  now.receiveMessage = function(name, message){
+    appendMessage(name,message);
+		
+		if (name != now.name) {
+			$("#notification").text("You have a new message!");
+			playSound("beeplo.wav");
+		}
+  }
+  
+  now.receiveUserList = function(userListString) {
+  	$("#users").text(userListString);
+  }
+  
+  $("#send-button").click(function(){
+    distribute();
+  });
+  
+  $("#text-input").keypress(function(event) {
+  if (event.which == 13) {
+     distribute();
+   }
+	});
+
+	// clear messages on click 
+	$(window).click(function() {
+  	clearMessageNotification();
+  });
+  $("#text-input").click(function() {
+  	clearMessageNotification();
+  });
+  
+	
+});
+
 
 //////////////////
 function clearMessageNotification(){
@@ -43,9 +97,6 @@ function draw(state,name){
 		$("#lastMoveUser").append("Last move by " + name + " on xx:xx xx");
 	
 	circles = createMultiArray(state.length,state[0].length);
-	// Creates canvas 900 × 680 at 350, 20	
-	var paper = Raphael(350, 20, 900, 680);
-	paper.clear();
 
 		// print the circles[][] array in human readable form
 		for (var x = 0; x < state.length; x++){
