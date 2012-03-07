@@ -4,10 +4,7 @@
 // <pre id="arrayPrint"></pre>
 
 function print2dArray(grid) {
-	
-	if (!grid.length) {
-		$("#arrayPrint").append("<br/></br>");
-	} else {
+			
 	for (var y = grid[0].length-1; y >= 0; y--){
 		for (var x = 0; x < grid.length; x++){			
 			$("#arrayPrint").append(grid[x][y] + "   ");
