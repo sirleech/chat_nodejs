@@ -4,20 +4,10 @@
 // <pre id="arrayPrint"></pre>
 
 function print2dArray(grid) {
-
-	$("#arrayPrint").append("  ");
-	for (var k = 0; k < grid[0].length; k++){
-		$("#arrayPrint").append("<strong> " + k + "</strong>  ");
-	}
-	
-	$("#arrayPrint").append("<br/></br>");
-	
-	for (var i = 0; i < grid.length; i++){
-		for (var k = 0; k < grid[0].length; k++){
-			if (k == 0)
-				$("#arrayPrint").append("<strong>" + i + "</strong>  ");
-				
-			$("#arrayPrint").append(grid[i][k] + "   ");
+		
+	for (var y = grid[0].length-1; y >= 0; y--){
+		for (var x = 0; x < grid.length; x++){			
+			$("#arrayPrint").append(grid[x][y] + "   ");
 		}
 		$("#arrayPrint").append("<br/></br>");
 	}
