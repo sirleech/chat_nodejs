@@ -32,13 +32,19 @@ function playSound( url ){
 // 0 = white, 1 = red, 2 = green
 
 
-function draw(state){
+function draw(state,name){
 	
 	print2dArray(state);
+	$("#lastMoveUser").empty();
+	if (now.name == name)
+		name = "<em>Me</em>";
+	
+	if (name != "hasNotBeenPlayed")	
+		$("#lastMoveUser").append("Last move by " + name + " on xx:xx xx");
 	
 	circles = createMultiArray(state.length,state[0].length);
-	// Creates canvas 900 × 680 at 350, 0	
-	var paper = Raphael(350, 0, 900, 680);
+	// Creates canvas 900 × 680 at 350, 20	
+	var paper = Raphael(350, 20, 900, 680);
 	paper.clear();
 
 		// print the circles[][] array in human readable form

@@ -1,0 +1,10 @@
+#lastMoveUser {
+	position: absolute;
+	top: 10px; left: 350px;
+}
+
+#notification {
+	font-size:14px;color:green;font-weight:bold;
+}
+
+#arrayPrint { display:none;}

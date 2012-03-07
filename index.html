@@ -6,12 +6,13 @@
 <script src="/nowjs/now.js"></script>
 <script src="MultiArray.js"></script>
 <script src="chatClient.js"></script>
+<link href="chat.css" rel="stylesheet" type="text/css">
 <script>
 
 $(document).ready(function(){
 
-  now.receiveState = function(state){
-  	draw(state);
+  now.receiveState = function(state,name){
+  	draw(state,name);
   }
   
   now.name = prompt("What's your name?", "");
@@ -58,7 +59,7 @@ $(document).ready(function(){
  
 <body> 
 <a href="http://en.wikipedia.org/wiki/Go_(game)" target="new">Go</a>
-<div id="notification" style="font-size:14px;color:green;font-weight:bold;"></div>
+<div id="notification"></div>
 <div id="messages"></div>
 <div id="sound" ></div>
 <div id="users" style="font-weight:bold;"></div>
@@ -66,6 +67,7 @@ $(document).ready(function(){
 <input type="text" id="text-input">
 <input type="button" value="Send" id="send-button">
 
+<div id="lastMoveUser"></div>
 <pre id="arrayPrint"></pre>
 </body> 
 </html> 

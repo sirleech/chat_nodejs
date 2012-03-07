@@ -40,6 +40,8 @@ var messages = new Array();
 var messageCount = 0;
 var userNames = new Array();
 var onlineUsersCount = 0;
+var lastMoveName;
+var lastMoveTime;
 
 ma = new MultiArray();
 var gameBoardState = ma.create(4,4);
@@ -60,7 +62,11 @@ everyone.connected(function(){
 		}
 	}
 	refreshUserList();
-	this.now.receiveState(gameBoardState);
+
+	if (lastMoveName == null)
+		lastMoveName = "hasNotBeenPlayed";		
+	
+	this.now.receiveState(gameBoardState,lastMoveName);
 	
 });
 
@@ -83,7 +89,8 @@ everyone.now.distributeMessage = function(message){
 
 everyone.now.distributeCircleState = function (state) {
 	gameBoardState = state;
-	everyone.now.receiveState(state);
+	lastMoveName = this.now.name;
+	everyone.now.receiveState(state,lastMoveName);
 }
 
 function refreshUserList(){
