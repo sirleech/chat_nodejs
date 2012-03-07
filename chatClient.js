@@ -72,14 +72,15 @@ function draw(state){
 		}
 	
 	paper.forEach(function (el) {
-    el.click(function changeColor() {
+    el.click(function toggleColor() {
     	
-			if (el.data("state") == "1") {
-				el.attr("fill", "black");
-				el.data("state",2)
+			if (el.data("state") == 2) {
+				state = 0;
+				el.data("state",state)
 			} else {
-				el.attr("fill", "gray");
-				el.data("state",1)
+				state = el.data("state");
+				state++;
+				el.data("state",state)
 			}
 			
 			//alert(el.data("x") + "," + el.data("y"));

@@ -42,7 +42,7 @@ var userNames = new Array();
 var onlineUsersCount = 0;
 
 ma = new MultiArray();
-var gameBoardState = ma.create(19,19);
+var gameBoardState = ma.create(4,4);
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
