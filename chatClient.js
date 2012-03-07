@@ -1,4 +1,4 @@
-// timeout
+// t = timeout
 var t;
 var circles = [];
 
@@ -12,7 +12,6 @@ function clearMessageNotification(){
 function newMessageNotification(t){
 	$("#notification").text("You have a new message!");
 	$("#notification").css("background","green");
-	$("#notification").css("height","80px");
 	t = setTimeout("blink()",1000);
 }
 
@@ -20,7 +19,7 @@ var blazo = true;
 
 function blink(){	
 	if (blazo == true)	{
-		$("#notification").css("background","red");
+		$("#notification").css("background","lightgreen");
 		blazo = false;
 		t = setTimeout("blink()",1000);
 	} else {
