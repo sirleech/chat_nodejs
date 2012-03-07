@@ -1,6 +1,6 @@
 // t = timeout
 var t;
-var circles = createMultiArray(5,5);
+var circles;
 
 //////////////////
 function clearMessageNotification(){
@@ -59,8 +59,10 @@ function draw(state){
 	
 	print2dArray(state);
 	
+	circles = createMultiArray(state.length,state[0].length);
 	// Creates canvas 320 × 200 at 30, 100	
 	var paper = Raphael(300, 100, 320, 200);
+	paper.clear();
 
 		// print the circles[][] array in human readable form
 		for (var x = 0; x < state.length; x++){
@@ -72,6 +74,7 @@ function draw(state){
 				
 				circles[x][y].data("x",x);
 				circles[x][y].data("y",y);
+				circles[x][y].attr("stroke", "gray");
 				
 				switch(state[x][y]){
 					case 0:
@@ -114,7 +117,7 @@ function draw(state){
 	
 	
 	function getState(){
-		var state = createMultiArray(5,5);
+		var state = createMultiArray(circles.length,circles[0].length);
 
 		for(var x = 0; x < circles.length; x++){
 			for(var y = 0; y < circles[0].length; y++){
