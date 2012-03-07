@@ -3,6 +3,15 @@
 //
 // <pre id="arrayPrint"></pre>
 
+MultiArray = function() {
+}
+
+MultiArray.prototype = {
+    create: function (x,y) {
+        return createMultiArray(x,y);
+    }
+}
+
 function print2dArray(grid) {
 				
 	for (var y = grid[0].length-1; y >= 0; y--){

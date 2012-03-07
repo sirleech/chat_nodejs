@@ -1,6 +1,7 @@
 ﻿var fs = require('fs');
 var path = require('path');
 var http = require('http');
+var multiArray = require('./multiArray.js');
 
 var server = http.createServer(function (request, response) {
  
@@ -45,6 +46,8 @@ var messageCount = 0;
 var userNames = new Array();
 var onlineUsersCount = 0;
 var curState = [0,0,0,0,0];
+
+//var gameBoardState = multiArray.createMultiArray(5,5);
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
