@@ -12,6 +12,10 @@ MultiArray.prototype = {
     }
 }
 
+
+// origin (0,0) starts on the top left corner like a web page.
+// it increases in X as you go right, and increases in Y as you go down.
+
 function print2dArray(grid) {
 	$("#arrayPrint").empty();			
 	for (var y = 0; y < grid[0].length; y++){
