@@ -16,9 +16,9 @@ function print2dArray(grid) {
 	$("#arrayPrint").empty();			
 	for (var y = 0; y < grid[0].length; y++){
 		for (var x = 0; x < grid.length; x++){			
-			$("#arrayPrint").append(grid[x][y] + "   ");
+			$("#arrayPrint").append(grid[x][y] + " ");
 		}
-		$("#arrayPrint").append("<br/></br>");
+		$("#arrayPrint").append("<br/>");
 	}
 }
 
