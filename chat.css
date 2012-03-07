@@ -1,6 +1,6 @@
 #lastMoveUser {
 	position: absolute;
-	top: 10px; left: 350px;
+	top: 28px; left: 350px;
 }
 
 #notification {
@@ -8,3 +8,8 @@
 }
 
 #arrayPrint { /*display:none;*/}
+
+.goTitle {
+	position:absolute;
+	top: 10px; left: 350px;
+}

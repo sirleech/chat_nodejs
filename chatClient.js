@@ -7,8 +7,8 @@ $(document).ready(function(){
 	
   now.receiveState = function(state,name){
 		if (paper == null)
-  		// Creates canvas 900 × 680 at 350, 20	
-  		paper = Raphael(350, 20, 900, 680);
+  		// Creates canvas 900 × 680 at 350x, 40y	
+  		paper = Raphael(350, 40, 900, 680);
   		
   	paper.clear();
   	draw(state,name);
@@ -55,7 +55,9 @@ $(document).ready(function(){
 });
 
 
-//////////////////
+//////////////////////////////////////////////////////////
+
+
 function clearMessageNotification(){
 	$("#notification").text("");
 	$("#notification").css("background","white");

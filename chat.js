@@ -44,7 +44,9 @@ var lastMoveName;
 var lastMoveTime;
 
 ma = new MultiArray();
-var gameBoardState = ma.create(4,4);
+
+// beginner boards of 9x9, 14x14. official Go is 19x19.
+var gameBoardState = ma.create(9,9);
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
