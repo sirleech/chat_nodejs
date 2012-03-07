@@ -1,37 +1,12 @@
-// t = timeout
-var t;
+
 var circles;
 
 //////////////////
 function clearMessageNotification(){
 	$("#notification").text("");
 	$("#notification").css("background","white");
-	$("#notification").css("height","0px");
-	clearTimeout(t);
+	//$("#notification").css("height","0px");
 }
-
-function newMessageNotification(){
-	playSound("beeplo.wav");
-	$("#notification").text("You have a new message!");
-	$("#notification").css("background","green");
-	t = setTimeout("blink()",1000);
-	
-}
-
-var blazo = true;
-
-function blink(){	
-	if (blazo == true)	{
-		$("#notification").css("background","lightgreen");
-		blazo = false;
-		t = setTimeout("blink()",1000);
-	} else {
-		$("#notification").css("background","green");
-		blazo = true;
-		t = setTimeout("blink()",1000);
-	}
-}
-
 
 function appendMessage(name,message){
 	if (name == now.name) {

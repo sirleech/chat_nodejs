@@ -22,8 +22,11 @@ $(document).ready(function(){
     
   now.receiveMessage = function(name, message){
     appendMessage(name,message);
-		if (name != now.name)
-			newMessageNotification();
+		
+		if (name != now.name) {
+			$("#notification").text("You have a new message!");
+			playSound("beeplo.wav");
+		}
   }
   
   now.receiveUserList = function(userListString) {
@@ -40,7 +43,11 @@ $(document).ready(function(){
    }
 	});
 
+	// clear messages on click 
 	$(window).click(function() {
+  	clearMessageNotification();
+  });
+  $("#text-input").click(function() {
   	clearMessageNotification();
   });
   
@@ -50,7 +57,7 @@ $(document).ready(function(){
 </head> 
  
 <body> 
-<div id="notification" style="font-size:14px;color:white;font-weight:bold;"></div>
+<div id="notification" style="font-size:14px;color:green;font-weight:bold;"></div>
 <div id="messages"></div>
 <div id="sound" ></div>
 <div id="users" style="font-weight:bold;"></div>
