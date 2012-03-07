@@ -1,0 +1,34 @@
+<html> 
+<head> 
+<title>nowjs test</title> 
+<script type="text/javascript" src="jquery.min.js"></script> 
+<script type="text/javascript" src="multiArray.js"></script> 
+
+<script>
+
+$(document).ready(function(){
+
+ 
+var grid = createMultiArray(5,5);
+ 
+grid[0][3] = 2;
+grid[4][4] = 1;
+grid[1][1] = 1;
+
+print2dArray(grid);
+
+
+	
+});
+</script>
+</head> 
+ 
+<body> 
+2d array
+
+<p>
+	<pre id="arrayPrint"></pre>
+</p>
+
+</body> 
+</html> 
