@@ -1,5 +1,6 @@
 // timeout
 var t;
+var circles = [];
 
 function clearMessageNotification(){
 	$("#notification").text("");
@@ -60,7 +61,6 @@ function draw(state){
 		var i = 0;
 		var incr;
 		// Creates circle at x = 50, y = 40, with radius 10
-		var circles = [];
 		
 		for(var i = 0; i < 5; i++){
 			incr = i * 20;
@@ -106,12 +106,11 @@ function draw(state){
 	
 	function getState(){
 		var state = [];
-		var i = 0;
-		paper.forEach(function (el) {
-			state[i] = el.data("state");
-			i++;
-		});
-		//alert(state);
+
+		for(var i = 0; i < circles.length; i++){
+			state[i] = circles[i].data("state");
+		}
+		
 		return state;
 	}
 
