@@ -1,7 +1,7 @@
 ﻿var fs = require('fs');
 var path = require('path');
 var http = require('http');
-var multiArray = require('./multiArray.js');
+var multiArray = require('./MultiArray.js');
 
 var server = http.createServer(function (request, response) {
  
