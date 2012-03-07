@@ -79,17 +79,14 @@ function draw(state){
 				switch(state[x][y]){
 					case 0:
 						circles[x][y].attr("fill", "white");
-						circles[x][y].data("color","white");
 						circles[x][y].data("state",0);
 						break;
 					case 1:
-						circles[x][y].attr("fill", "red");
-						circles[x][y].data("color","red");
+						circles[x][y].attr("fill", "gray");
 						circles[x][y].data("state",1);
 						break;
 					case 2:
-						circles[x][y].attr("fill", "green");
-						circles[x][y].data("color","green");
+						circles[x][y].attr("fill", "black");
 						circles[x][y].data("state",2);
 						break;
 				}
@@ -100,13 +97,11 @@ function draw(state){
 	paper.forEach(function (el) {
     el.click(function changeColor() {
     	
-			if (el.data("color") == "red") {
-				el.attr("fill", "green");
-				el.data("color","green");
+			if (el.data("state") == "1") {
+				el.attr("fill", "black");
 				el.data("state",2)
 			} else {
-				el.attr("fill", "red");
-				el.data("color","red");
+				el.attr("fill", "gray");
 				el.data("state",1)
 			}
 			
