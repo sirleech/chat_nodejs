@@ -4,10 +4,6 @@ var http = require('http');
 var ma = require('./MultiArray.js');
 
 var server = http.createServer(function (request, response) {
- 
-//console.log('request starting...');
-     
-    //console.log('request starting...');
      
     var filePath = '.' + request.url;
     if (filePath == './')
@@ -37,7 +33,6 @@ var server = http.createServer(function (request, response) {
  
 console.log('Server running at http://127.0.0.1:8888/');
 
-//server.listen(8888);
 var nowjs = require("now");
 var everyone = nowjs.initialize(server);
 var names = new Array();
@@ -45,7 +40,6 @@ var messages = new Array();
 var messageCount = 0;
 var userNames = new Array();
 var onlineUsersCount = 0;
-//var curState = [0,0,0,0,0];
 
 ma = new MultiArray();
 var gameBoardState = ma.create(5,5);

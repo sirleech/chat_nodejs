@@ -1,5 +1,5 @@
 
-
+// REMOVE THESE!!!!
 ////////////////////////////
 function print2dArray(grid) {
 	$("#arrayPrint").empty();			
@@ -87,18 +87,19 @@ function playSound( url ){
 
 
 function draw(state){
-	// Creates canvas 320 × 200 at 10, 50
-	//state = createMultiArray(5,5);
+	
 	print2dArray(state);
-	var paper = Raphael(350, 0, 320, 200);
+	
+	// Creates canvas 320 × 200 at 30, 100	
+	var paper = Raphael(300, 100, 320, 200);
 
 		// print the circles[][] array in human readable form
-		for (var y = state[0].length-1; y >= 0; y--){
-			for (var x = 0; x < state.length; x++){			
+		for (var x = 0; x < state.length; x++){
+			for (var y = 0; y < state[0].length; y++){			
 				// do something
 				horizontalIncrement = x * 20;
 				verticalIncrement = y * 20;
-				circles[x][y] = paper.circle(50 + horizontalIncrement, 40 + verticalIncrement, 10);
+				circles[x][y] = paper.circle(50 + horizontalIncrement, 140 - verticalIncrement, 10);
 				
 				switch(state[x][y]){
 					case 0:
