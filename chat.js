@@ -90,8 +90,9 @@ function refreshUserList(){
 	everyone.getUsers(function (users) {
 		var userString = "";
 		for (var i = 0; i < users.length; i ++) {
-			userString = userString + ", " + userNames[users[i]];
+			if (userNames[users[i]] != "")
+				userString = userString + ", " + userNames[users[i]];
 		}
-  	everyone.now.receiveUserList("There are " + users.length + " people online now." + userString + " =  people online now.");
+  	everyone.now.receiveUserList(userString + " =  these people online now.");
 	});	
 }
