@@ -10,10 +10,12 @@ function clearMessageNotification(){
 	clearTimeout(t);
 }
 
-function newMessageNotification(t){
+function newMessageNotification(){
+	playSound("beeplo.wav");
 	$("#notification").text("You have a new message!");
 	$("#notification").css("background","green");
 	t = setTimeout("blink()",1000);
+	
 }
 
 var blazo = true;
