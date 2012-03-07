@@ -90,7 +90,7 @@ function refreshUserList(){
 	everyone.getUsers(function (users) {
 		var userString = "";
 		for (var i = 0; i < users.length; i ++) {
-			if (userNames[users[i]] != "")
+			if (userNames[users[i]] != "" && userNames[users[i]] != "undefined")
 				userString = userString + ", " + userNames[users[i]];
 		}
   	everyone.now.receiveUserList(userString + " =  these people online now.");
