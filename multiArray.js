@@ -17,11 +17,11 @@ function print2dArray(grid) {
 // array[height][width]
 
 function createMultiArray(x,y) {
-	var grid = new Array(y);
+	var grid = new Array(x);
 
-	for (var i = 0; i < y; i++) {
-		grid[i] = new Array(x);
-		for (var k = 0; k < x; k++) {
+	for (var i = 0; i < x; i++) {
+		grid[i] = new Array(y);
+		for (var k = 0; k < y; k++) {
 			grid[i][k] = 0;
 		}
 	}
