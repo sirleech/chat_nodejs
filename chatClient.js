@@ -3,7 +3,7 @@
 ////////////////////////////
 function print2dArray(grid) {
 	$("#arrayPrint").empty();			
-	for (var y = grid[0].length-1; y >= 0; y--){
+	for (var y = 0; y < grid[0].length; y++){
 		for (var x = 0; x < grid.length; x++){			
 			$("#arrayPrint").append(grid[x][y] + "   ");
 		}
@@ -99,7 +99,10 @@ function draw(state){
 				// do something
 				horizontalIncrement = x * 20;
 				verticalIncrement = y * 20;
-				circles[x][y] = paper.circle(50 + horizontalIncrement, 140 - verticalIncrement, 10);
+				circles[x][y] = paper.circle(50 + horizontalIncrement, 50 + verticalIncrement, 10);
+				
+				circles[x][y].data("x",x);
+				circles[x][y].data("y",y);
 				
 				switch(state[x][y]){
 					case 0:
@@ -135,6 +138,7 @@ function draw(state){
 				el.data("state",1)
 			}
 			
+			//alert(el.data("x") + "," + el.data("y"));
 			now.distributeCircleState(getState());
 		});
 	});
