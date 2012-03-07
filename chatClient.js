@@ -37,8 +37,8 @@ function draw(state){
 	print2dArray(state);
 	
 	circles = createMultiArray(state.length,state[0].length);
-	// Creates canvas 320 × 200 at 30, 100	
-	var paper = Raphael(300, 100, 320, 200);
+	// Creates canvas 900 × 680 at 350, 0	
+	var paper = Raphael(350, 0, 900, 680);
 	paper.clear();
 
 		// print the circles[][] array in human readable form
@@ -47,7 +47,7 @@ function draw(state){
 				// do something
 				horizontalIncrement = x * 20;
 				verticalIncrement = y * 20;
-				circles[x][y] = paper.circle(50 + horizontalIncrement, 50 + verticalIncrement, 10);
+				circles[x][y] = paper.circle(20 + horizontalIncrement, 20 + verticalIncrement, 10);
 				
 				circles[x][y].data("x",x);
 				circles[x][y].data("y",y);
