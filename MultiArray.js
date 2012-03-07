@@ -13,7 +13,7 @@ MultiArray.prototype = {
 }
 
 function print2dArray(grid) {
-				
+	$("#arrayPrint").empty();			
 	for (var y = grid[0].length-1; y >= 0; y--){
 		for (var x = 0; x < grid.length; x++){			
 			$("#arrayPrint").append(grid[x][y] + "   ");

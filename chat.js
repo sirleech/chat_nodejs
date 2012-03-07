@@ -1,7 +1,7 @@
 ﻿var fs = require('fs');
 var path = require('path');
 var http = require('http');
-var multiArray = require('./MultiArray.js');
+var ma = require('./MultiArray.js');
 
 var server = http.createServer(function (request, response) {
  
@@ -45,9 +45,10 @@ var messages = new Array();
 var messageCount = 0;
 var userNames = new Array();
 var onlineUsersCount = 0;
-var curState = [0,0,0,0,0];
+//var curState = [0,0,0,0,0];
 
-//var gameBoardState = multiArray.createMultiArray(5,5);
+ma = new MultiArray();
+var gameBoardState = ma.create(5,5);
 
 everyone.connected(function(){
   console.log("Joined: " + this.now.name);
@@ -65,7 +66,7 @@ everyone.connected(function(){
 		}
 	}
 	refreshUserList();
-	this.now.receiveState(curState);
+	this.now.receiveState(gameBoardState);
 	
 });
 
@@ -87,7 +88,7 @@ everyone.now.distributeMessage = function(message){
 };
 
 everyone.now.distributeCircleState = function (state) {
-	curState = state;
+	gameBoardState = state;
 	everyone.now.receiveState(state);
 }
 

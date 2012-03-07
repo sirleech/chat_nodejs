@@ -1,7 +1,39 @@
+
+
+////////////////////////////
+function print2dArray(grid) {
+	$("#arrayPrint").empty();			
+	for (var y = grid[0].length-1; y >= 0; y--){
+		for (var x = 0; x < grid.length; x++){			
+			$("#arrayPrint").append(grid[x][y] + "   ");
+		}
+		$("#arrayPrint").append("<br/></br>");
+	}
+}
+
+// create a 2d array 
+// array[height][width]
+
+function createMultiArray(x,y) {
+	var grid = new Array(x);
+
+	for (var i = 0; i < x; i++) {
+		grid[i] = new Array(y);
+		for (var k = 0; k < y; k++) {
+			grid[i][k] = 0;
+		}
+	}
+	return grid;
+}
+
+
+///////////////////////////////////
+
 // t = timeout
 var t;
-var circles = [];
+var circles = createMultiArray(5,5);
 
+//////////////////
 function clearMessageNotification(){
 	$("#notification").text("");
 	$("#notification").css("background","white");
@@ -50,43 +82,46 @@ function playSound( url ){
   document.getElementById("sound").innerHTML="<embed src='"+url+"' hidden=true autostart=true loop=false>";
 }
 
-// state = [0,0,0,0,0] is an array
+// state = [x][y] is a 2d array
 // 0 = white, 1 = red, 2 = green
+
+
 function draw(state){
 	// Creates canvas 320 × 200 at 10, 50
-	
+	//state = createMultiArray(5,5);
+	print2dArray(state);
 	var paper = Raphael(350, 0, 320, 200);
-			
-		var i = 0;
-		var incr;
-		// Creates circle at x = 50, y = 40, with radius 10
-		
-		for(var i = 0; i < 5; i++){
-			incr = i * 20;
-			circles[i] = paper.circle(50 + incr, 40, 10);
-			
-			switch(state[i]){
-				case 0:
-					circles[i].attr("fill", "white");
-					circles[i].data("color","white");
-					circles[i].data("state",0);
-					break;
-				case 1:
-					circles[i].attr("fill", "red");
-					circles[i].data("color","red");
-					circles[i].data("state",1);
-					break;
-				case 2:
-					circles[i].attr("fill", "green");
-					circles[i].data("color","green");
-					circles[i].data("state",2);
-					break;
+
+		// print the circles[][] array in human readable form
+		for (var y = state[0].length-1; y >= 0; y--){
+			for (var x = 0; x < state.length; x++){			
+				// do something
+				horizontalIncrement = x * 20;
+				verticalIncrement = y * 20;
+				circles[x][y] = paper.circle(50 + horizontalIncrement, 40 + verticalIncrement, 10);
+				
+				switch(state[x][y]){
+					case 0:
+						circles[x][y].attr("fill", "white");
+						circles[x][y].data("color","white");
+						circles[x][y].data("state",0);
+						break;
+					case 1:
+						circles[x][y].attr("fill", "red");
+						circles[x][y].data("color","red");
+						circles[x][y].data("state",1);
+						break;
+					case 2:
+						circles[x][y].attr("fill", "green");
+						circles[x][y].data("color","green");
+						circles[x][y].data("state",2);
+						break;
+				}
+				
 			}
 		}
 	
-	
 	paper.forEach(function (el) {
-    
     el.click(function changeColor() {
     	
 			if (el.data("color") == "red") {
@@ -103,18 +138,18 @@ function draw(state){
 		});
 	});
 	
+	
 	function getState(){
-		var state = [];
+		var state = createMultiArray(5,5);
 
-		for(var i = 0; i < circles.length; i++){
-			state[i] = circles[i].data("state");
+		for(var x = 0; x < circles.length; x++){
+			for(var y = 0; y < circles[0].length; y++){
+				state[x][y] = circles[x][y].data("state");
+			}
 		}
 		
 		return state;
 	}
 
-	for (var i = 0; i < circles.length; i++){
-		//circles[i].attr("fill", "#fff");
-	}
 
 }
