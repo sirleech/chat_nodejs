@@ -14,7 +14,16 @@ $(document).ready(function(){
   	draw(state,name,lastMoveDateTime);
   }
   
+  now.receiveMove = function (x,y,state,name,lastMoveDateTime) {
+		setCircleColour(x,y,state);
+		// deserialize the date object? it's not transferred as Date()?	
+		var date = new Date(lastMoveDateTime.toLocaleString());
+		dateString = date.getHours() + ":" + date.getMinutes();
+		$("#lastMoveUser").append("Last move by " + name + " on " + dateString);
+	}
+  
   now.name = prompt("What's your name?", "");
+  $("#me").append(now.name);
   
   now.receiveMessageNoNotifications = function(name, message){
   	appendMessage(name,message);
@@ -84,15 +93,36 @@ function playSound( url ){
   document.getElementById("sound").innerHTML="<embed src='"+url+"' hidden=true autostart=true loop=false>";
 }
 
-// state = [x][y] is a 2d array
-// 0 = white, 1 = red, 2 = green
+
+function setCircleColour(x,y,state) {
+	switch(state){
+		case 0:
+			circles[x][y].attr("fill", "white");
+			circles[x][y].data("state",0);
+			break;
+		case 1:
+			circles[x][y].attr("fill", "gray");
+			circles[x][y].data("state",1);
+			break;
+		case 2:
+			circles[x][y].attr("fill", "black");
+			circles[x][y].data("state",2);
+			break;
+	}
+}
+
 
 
 //########################################################
 //////////////////////////////////////////////////////////
 
+
+
 // draw()
 
+
+// state = [x][y] is a 2d array
+// 0 = white, 1 = red, 2 = green
 
 //////////////////////////////////////////////////////////
 //########################################################
@@ -125,20 +155,7 @@ function draw(state,name,lastMoveDateTime){
 				circles[x][y].data("y",y);
 				circles[x][y].attr("stroke", "gray");
 				
-				switch(state[x][y]){
-					case 0:
-						circles[x][y].attr("fill", "white");
-						circles[x][y].data("state",0);
-						break;
-					case 1:
-						circles[x][y].attr("fill", "gray");
-						circles[x][y].data("state",1);
-						break;
-					case 2:
-						circles[x][y].attr("fill", "black");
-						circles[x][y].data("state",2);
-						break;
-				}
+				setCircleColour(x,y,state[x][y]);
 				
 			}
 		}
