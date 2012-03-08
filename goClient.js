@@ -109,11 +109,11 @@ function playSound( url ){
 function setCircleColour(x,y,state) {
 	switch(state){
 		case 0:
-			circles[x][y].attr("fill", "white");
+			circles[x][y].attr("fill", "brown");
 			circles[x][y].data("state",0);
 			break;
 		case 1:
-			circles[x][y].attr("fill", "gray");
+			circles[x][y].attr("fill", "white");
 			circles[x][y].data("state",1);
 			break;
 		case 2:
@@ -123,6 +123,39 @@ function setCircleColour(x,y,state) {
 	}
 }
 
+function drawLines() {
+
+	//lines
+	
+	l = paper.rect(50 + horizontalIncrement, 50, 2, 400);
+	l.attr("fill","black");
+	l.data("type","line");
+	//l.toBack();
+	
+	l = paper.rect(50, 50 + verticalIncrement, 400, 2);
+	l.attr("fill","black");
+	l.data("type","line");
+	//l.toBack();
+}
+
+function drawBackground(){
+	// rectangle with rounded corners
+	var rec = paper.rect(0, 0, 500, 500, 10);
+	rec.attr("fill","brown");
+	rec.toBack();
+}
+
+function getState(){
+	var state = createMultiArray(circles.length,circles[0].length);
+
+	for(var x = 0; x < circles.length; x++){
+		for(var y = 0; y < circles[0].length; y++){
+			state[x][y] = circles[x][y].data("state");
+		}
+	}
+	
+	return state;
+}
 
 
 //########################################################
@@ -148,6 +181,8 @@ function draw(state,name,lastMoveDateTime){
 	if (now.name == name)
 		name = "<em>Me</em>";
 	
+
+	
 	// deserialize the date object? it's not transferred as Date()?	
 	var date = new Date(lastMoveDateTime.toLocaleString());
 	dateString = date.getHours() + ":" + date.getMinutes();
@@ -160,46 +195,48 @@ function draw(state,name,lastMoveDateTime){
 	// print the circles[][] array in human readable form
 	for (var x = 0; x < state.length; x++){
 		for (var y = 0; y < state[0].length; y++){			
+		
+		
 			// do something
 			horizontalIncrement = x * 50;
 			verticalIncrement = y * 50;
+			
+			drawLines();
+			
+			//circles
 			circles[x][y] = paper.circle(50 + horizontalIncrement, 50 + verticalIncrement, 25);
 			
 			circles[x][y].data("x",x);
 			circles[x][y].data("y",y);
-			circles[x][y].attr("stroke", "gray");
+			circles[x][y].attr("stroke", "none");
+			circles[x][y].toFront();
 			
 			setCircleColour(x,y,state[x][y]);
-			
 		}
 	}
 	
+	drawBackground();
+	 
 	paper.forEach(function (el) {
-    el.click(function toggleColor() {
-    	
-			if (el.data("state") == 2) {
-				state = 0;
-				el.data("state",state)
-			} else {
-				state = el.data("state");
-				state++;
-				el.data("state",state)
-			}
+		if (el.data("type") != "line") {
+		  el.click(function toggleColor() {
+		  	
+				if (el.data("state") == 2) {
+					state = 0;
+					el.data("state",state)
+				} else {
+					state = el.data("state");
+					state++;
+					el.data("state",state)
+				}
 
-			now.distributeMove(el.data("x"),el.data("y"),el.data("state"));
-		});
+				now.distributeMove(el.data("x"),el.data("y"),el.data("state"));
+			});
+		}
 	});
 	
 	
-	function getState(){
-		var state = createMultiArray(circles.length,circles[0].length);
 
-		for(var x = 0; x < circles.length; x++){
-			for(var y = 0; y < circles[0].length; y++){
-				state[x][y] = circles[x][y].data("state");
-			}
-		}
-		
-		return state;
-	}
 }
+
+
