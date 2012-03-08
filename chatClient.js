@@ -5,13 +5,13 @@ var circles;
 
 $(document).ready(function(){
 	
-  now.receiveState = function(state,name){
+  now.receiveState = function(state,name,lastMoveDateTime){
 		if (paper == null)
   		// Creates canvas 900 × 680 at 350x, 40y	
   		paper = Raphael(350, 40, 900, 680);
   		
   	paper.clear();
-  	draw(state,name);
+  	draw(state,name,lastMoveDateTime);
   }
   
   now.name = prompt("What's your name?", "");
@@ -88,7 +88,7 @@ function playSound( url ){
 // 0 = white, 1 = red, 2 = green
 
 
-function draw(state,name){
+function draw(state,name,lastMoveDateTime){
 	
 	print2dArray(state);
 	$("#lastMoveUser").empty();
@@ -96,7 +96,7 @@ function draw(state,name){
 		name = "<em>Me</em>";
 	
 	if (name != "hasNotBeenPlayed")	
-		$("#lastMoveUser").append("Last move by " + name + " on xx:xx xx");
+		$("#lastMoveUser").append("Last move by " + name + " on " + lastMoveDateTime.toLocaleString());
 	
 	circles = createMultiArray(state.length,state[0].length);
 

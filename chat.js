@@ -1,3 +1,7 @@
+
+// Server
+////////////////////////////////////////////////////////////////////////
+
 ﻿var fs = require('fs');
 var path = require('path');
 var http = require('http');
@@ -33,6 +37,8 @@ var server = http.createServer(function (request, response) {
  
 console.log('Server running at http://127.0.0.1:8888/');
 
+////////////////////////////////////////////////////////////////////////////
+
 var nowjs = require("now");
 var everyone = nowjs.initialize(server);
 var names = new Array();
@@ -41,7 +47,7 @@ var messageCount = 0;
 var userNames = new Array();
 var onlineUsersCount = 0;
 var lastMoveName;
-var lastMoveTime;
+var lastMoveDateTime = new Date();
 
 ma = new MultiArray();
 
@@ -68,7 +74,8 @@ everyone.connected(function(){
 	if (lastMoveName == null)
 		lastMoveName = "hasNotBeenPlayed";		
 	
-	this.now.receiveState(gameBoardState,lastMoveName);
+	lastMoveDateTime = new Date();
+	this.now.receiveState(gameBoardState,lastMoveName,lastMoveDateTime);
 	
 });
 
@@ -92,7 +99,8 @@ everyone.now.distributeMessage = function(message){
 everyone.now.distributeCircleState = function (state) {
 	gameBoardState = state;
 	lastMoveName = this.now.name;
-	everyone.now.receiveState(state,lastMoveName);
+	lastMoveDateTime = new Date();
+	everyone.now.receiveState(state,lastMoveName,lastMoveDateTime);
 }
 
 function refreshUserList(){
