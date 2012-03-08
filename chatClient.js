@@ -88,6 +88,15 @@ function playSound( url ){
 // 0 = white, 1 = red, 2 = green
 
 
+//########################################################
+//////////////////////////////////////////////////////////
+
+// draw()
+
+
+//////////////////////////////////////////////////////////
+//########################################################
+
 function draw(state,name,lastMoveDateTime){
 	
 	print2dArray(state);
@@ -95,8 +104,12 @@ function draw(state,name,lastMoveDateTime){
 	if (now.name == name)
 		name = "<em>Me</em>";
 	
+	// deserialize the date object? it's not transferred as Date()?	
+	var date = new Date(lastMoveDateTime.toLocaleString());
+	dateString = date.getHours() + ":" + date.getMinutes();
+	
 	if (name != "hasNotBeenPlayed")	
-		$("#lastMoveUser").append("Last move by " + name + " on " + lastMoveDateTime.toLocaleString());
+		$("#lastMoveUser").append("Last move by " + name + " on " + dateString);
 	
 	circles = createMultiArray(state.length,state[0].length);
 
@@ -159,6 +172,4 @@ function draw(state,name,lastMoveDateTime){
 		
 		return state;
 	}
-
-
 }
