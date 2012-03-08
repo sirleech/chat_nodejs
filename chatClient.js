@@ -3,6 +3,15 @@
 var paper;
 var circles;
 
+ma = new MultiArray();
+
+// beginner boards of 9x9, 14x14. official Go is 19x19.
+var gameBoardState = ma.create(9,9);
+
+//////////////////////////
+
+//////////////////////////
+
 $(document).ready(function(){
 	
   now.receiveState = function(state,name,lastMoveDateTime){
@@ -21,6 +30,8 @@ $(document).ready(function(){
 		dateString = date.getHours() + ":" + date.getMinutes();
 		$("#lastMoveUser").empty();
 		$("#lastMoveUser").append("Last move by " + name + " on " + dateString);
+		gameBoardState[x][y] = state;
+		print2dArray(gameBoardState);
 	}
   
   now.name = prompt("What's your name?", "");
@@ -129,6 +140,8 @@ function setCircleColour(x,y,state) {
 //########################################################
 
 function draw(state,name,lastMoveDateTime){
+	
+	gameBoardState = state;
 	
 	print2dArray(state);
 	$("#lastMoveUser").empty();
