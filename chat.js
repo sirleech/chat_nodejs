@@ -96,11 +96,11 @@ everyone.now.distributeMessage = function(message){
 	console.log(messageCount + " messages");
 };
 
-everyone.now.distributeCircleState = function (state) {
-	gameBoardState = state;
+everyone.now.distributeMove = function (x,y,state) {
+	gameBoardState[x][y] = state;
 	lastMoveName = this.now.name;
 	lastMoveDateTime = new Date();
-	everyone.now.receiveState(state,lastMoveName,lastMoveDateTime);
+	everyone.now.receiveMove(x,y,state,lastMoveName,lastMoveDateTime);
 }
 
 function refreshUserList(){

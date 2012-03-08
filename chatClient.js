@@ -19,6 +19,7 @@ $(document).ready(function(){
 		// deserialize the date object? it's not transferred as Date()?	
 		var date = new Date(lastMoveDateTime.toLocaleString());
 		dateString = date.getHours() + ":" + date.getMinutes();
+		$("#lastMoveUser").empty();
 		$("#lastMoveUser").append("Last move by " + name + " on " + dateString);
 	}
   
@@ -143,22 +144,22 @@ function draw(state,name,lastMoveDateTime){
 	
 	circles = createMultiArray(state.length,state[0].length);
 
-		// print the circles[][] array in human readable form
-		for (var x = 0; x < state.length; x++){
-			for (var y = 0; y < state[0].length; y++){			
-				// do something
-				horizontalIncrement = x * 20;
-				verticalIncrement = y * 20;
-				circles[x][y] = paper.circle(20 + horizontalIncrement, 20 + verticalIncrement, 10);
-				
-				circles[x][y].data("x",x);
-				circles[x][y].data("y",y);
-				circles[x][y].attr("stroke", "gray");
-				
-				setCircleColour(x,y,state[x][y]);
-				
-			}
+	// print the circles[][] array in human readable form
+	for (var x = 0; x < state.length; x++){
+		for (var y = 0; y < state[0].length; y++){			
+			// do something
+			horizontalIncrement = x * 20;
+			verticalIncrement = y * 20;
+			circles[x][y] = paper.circle(20 + horizontalIncrement, 20 + verticalIncrement, 10);
+			
+			circles[x][y].data("x",x);
+			circles[x][y].data("y",y);
+			circles[x][y].attr("stroke", "gray");
+			
+			setCircleColour(x,y,state[x][y]);
+			
 		}
+	}
 	
 	paper.forEach(function (el) {
     el.click(function toggleColor() {
@@ -171,9 +172,8 @@ function draw(state,name,lastMoveDateTime){
 				state++;
 				el.data("state",state)
 			}
-			
-			//alert(el.data("x") + "," + el.data("y"));
-			now.distributeCircleState(getState());
+
+			now.distributeMove(el.data("x"),el.data("y"),el.data("state"));
 		});
 	});
 	
