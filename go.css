@@ -2,3 +2,5 @@
 	position:relative;
 	top:500px;
 }
+
+#lastMoveUser {float:left; border-right:20px;}

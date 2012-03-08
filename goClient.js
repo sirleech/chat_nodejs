@@ -23,6 +23,7 @@ $(document).ready(function(){
   	draw(state,name,lastMoveDateTime);
   }
   
+ 
   now.receiveMove = function (x,y,state,name,lastMoveDateTime) {
 		setCircleColour(x,y,state);
 		// deserialize the date object? it's not transferred as Date()?	
@@ -56,6 +57,11 @@ $(document).ready(function(){
   
   $("#send-button").click(function(){
     distribute();
+  });
+  
+  $("#new-game-button").click(function(){
+    //confirm("Are you sure you want to start a new game?");
+    now.newGame();
   });
   
   $("#text-input").keypress(function(event) {

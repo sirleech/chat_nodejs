@@ -103,6 +103,16 @@ everyone.now.distributeMove = function (x,y,state) {
 	everyone.now.receiveMove(x,y,state,lastMoveName,lastMoveDateTime);
 }
 
+everyone.now.newGame = function () {
+	var blankBoardState = ma.create(9,9);
+	
+	if (lastMoveName == null)
+		lastMoveName = "hasNotBeenPlayed";		
+	
+	lastMoveDateTime = new Date();
+	everyone.now.receiveState(blankBoardState,lastMoveName,lastMoveDateTime);
+}
+
 function refreshUserList(){
 	everyone.getUsers(function (users) {
 		var userString = "";
